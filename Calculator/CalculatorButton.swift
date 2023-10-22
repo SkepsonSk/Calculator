@@ -1,10 +1,14 @@
 import SwiftUI
 
 struct CalculatorButton: View {
+    @Binding var calculationString: String;
+    
     var number: Int;
     
     var body: some View {
-        Button(action: setNumber) {
+        Button(action: {
+            self.calculationString.append(String(self.number))
+        }) {
             Text("\(number)")
         }
             .frame(width: 100, height: 60)
@@ -15,6 +19,6 @@ struct CalculatorButton: View {
 
 struct CalculatorButton_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorButton(number: 0)
+        CalculatorButton(calculationString: .constant(""), number: 0)
     }
 }

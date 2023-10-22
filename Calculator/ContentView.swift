@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-
+    
     @State var calculationString: String = "";
     
     var body: some View {
@@ -15,35 +15,35 @@ struct ContentView: View {
                 .frame(width: 315, height: 60)
                 .border(Color.black, width: 2)
                 .disableAutocorrection(true)
-
+            
                 .multilineTextAlignment(TextAlignment.center)
             HStack {
-                CalculatorButton(number: 1)
-                CalculatorButton(number: 2)
-                CalculatorButton(number: 3)
+                CalculatorButton(calculationString: $calculationString, number: 1)
+                CalculatorButton(calculationString: $calculationString, number: 2)
+                CalculatorButton(calculationString: $calculationString, number: 3)
             }
             HStack {
-                CalculatorButton(number: 4)
-                CalculatorButton(number: 5)
-                CalculatorButton(number: 6)
+                CalculatorButton(calculationString: $calculationString, number: 4)
+                CalculatorButton(calculationString: $calculationString, number: 5)
+                CalculatorButton(calculationString: $calculationString, number: 6)
             }
             HStack {
-                CalculatorButton(number: 7)
-                CalculatorButton(number: 8)
-                CalculatorButton(number: 9)
+                CalculatorButton(calculationString: $calculationString, number: 7)
+                CalculatorButton(calculationString: $calculationString, number: 8)
+                CalculatorButton(calculationString: $calculationString, number: 9)
             }
             HStack {
-                CalculatorButton(number: 0)
-                ActionButton(label: "+")
-                ActionButton(label: "-")
+                CalculatorButton(calculationString: $calculationString, number: 0)
+                ActionButton(calculationString: $calculationString, label: "+")
+                ActionButton(calculationString: $calculationString, label: "-")
             }
             HStack {
-                ActionButton(label: "*")
-                ActionButton(label: "/")
-                ActionButton(label: "SIN")
+                ActionButton(calculationString: $calculationString, label: "*")
+                ActionButton(calculationString: $calculationString, label: "/")
+                ActionButton(calculationString: $calculationString, label: "sin")
             }
             
-            Button(action: setNumber) {
+            Button(action: performCalculate) {
                 Text("Oblicz")
             }
             .frame(width: 315, height: 60)
@@ -51,10 +51,10 @@ struct ContentView: View {
             .font(.system(size: 26))
         }
     }
-}
-
-func setNumber() -> Void {
-                                       
+    
+    func performCalculate() -> Void {
+        self.calculationString = calculate(calculationString: self.calculationString)
+    }
 }
                        
 struct ContentView_Previews: PreviewProvider {
