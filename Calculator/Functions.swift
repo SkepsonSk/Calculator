@@ -3,8 +3,8 @@ import Foundation
 func calculate(calculationString: String) -> String {
     var newCalculationString: String = ""
     
-    if calculationString == "ERR" {
-        return "";
+    if calculationString == "ERR" || calculationString == "" {
+        return newCalculationString;
     }
     
     let components = calculationString.components(separatedBy: CharacterSet.decimalDigits.inverted);
@@ -12,6 +12,8 @@ func calculate(calculationString: String) -> String {
     guard components.count == 2, let a = Int(components[0]), let b = Int(components[1]) else {
         return "ERR";
     }
+    
+    print(calculationString.filter({ !CharacterSet.decimalDigits.contains($0.unicodeScalars.first!) }))
     
     switch calculationString.filter({ !CharacterSet.decimalDigits.contains($0.unicodeScalars.first!) }) {
         
